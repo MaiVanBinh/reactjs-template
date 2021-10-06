@@ -1,9 +1,13 @@
-import './App.css';
-import Products from './pages/products/Products';
+import "./App.css";
+import RouterConfig from "./router/RouterConfig";
+import Navigation from "./components/Navigation/Navigation";
 
 function App() {
   return (
-    <Products />
+    <>
+      <Navigation />
+      <RouterConfig />
+    </>
   );
 }
 
