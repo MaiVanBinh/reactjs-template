@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Navigation.css";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useLocation  } from "react-router-dom";
 
 const Navigation = () => {
   const [pages, setPage] = useState(1);
@@ -8,17 +8,21 @@ const Navigation = () => {
 
   const changePage = (pageRoute) => {
     history.push(pageRoute);
-    if (pageRoute === "/products") setPage(1);
-    else if (pageRoute === "/sign-in") setPage(2);
-    else setPage(0);
   };
+
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === "/products") setPage(1);
+    else if (location.pathname === "/sign-in") setPage(2);
+    else setPage(0);
+  }, [location]);
 
   return (
     <>
       <ul className="nav">
         <li onClick={() => changePage("/")}>
           <NavLink to="/" activeClassName={pages === 0 ? "active" : ""}>
-            Home
+            Home-Private
           </NavLink>
         </li>
         <li onClick={() => changePage("/products")}>
