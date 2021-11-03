@@ -4,19 +4,13 @@ import Loader from "../components/UI/Loader/Loader";
 import ErrorBoundary from "./ErrorBoundary";
 const PrivateRoutes = [
   {
-    path: "/",
-    exact: true,
-    component: lazy(() => import("./../pages/home/home")),
-  },
-];
-const publicRoutes = [
-  // public router là routes trước khi login, gồm những routes nào thì mih list ra đây
-
-  {
     path: "/products",
     exact: true,
     component: lazy(() => import("./../pages/products/Products")),
   },
+];
+const publicRoutes = [
+  // public router là routes trước khi login, gồm những routes nào thì mih list ra đây
   {
     path: "/sign-in",
     exact: true,
@@ -31,7 +25,7 @@ function PrivateRoute({ children, ...rest }) {
   let location = useLocation();
 
   // check login
-  const isLoggedIn = true;
+  const isLoggedIn = false;
   if (isLoggedIn) return <Route {...rest}>{children}</Route>;
   return (
     <Redirect
