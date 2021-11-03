@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { Switch, Route, useLocation, Redirect } from "react-router-dom";
 import Loader from "../components/UI/Loader/Loader";
 import ErrorBoundary from "./ErrorBoundary";
+
 const PrivateRoutes = [
   {
     path: "/products",
@@ -9,6 +10,7 @@ const PrivateRoutes = [
     component: lazy(() => import("./../pages/products/Products")),
   },
 ];
+
 const publicRoutes = [
   // public router là routes trước khi login, gồm những routes nào thì mih list ra đây
   {
