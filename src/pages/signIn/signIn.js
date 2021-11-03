@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import "./signIn.css";
+import { connect } from "react-redux";
+import { useHistory } from "react-router";
 
-const SignIn = () => {
+const SignIn = (props) => {
+  const { onLoginSuccess } = props;
+  const history = useHistory();
+
   // add state username
   const [username, setUsername] = useState({
     value: "",
@@ -12,7 +17,7 @@ const SignIn = () => {
     value: "",
     touch: false,
   });
-  const [errMessage, setErrMessage] = useState('');
+  const [errMessage, setErrMessage] = useState("");
 
   // add login handler function
   const loginHandler = (e) => {
@@ -34,16 +39,20 @@ const SignIn = () => {
       username: username.value,
       password: password.value,
     };
-    console.log(payload)
-    fetch('http://localhost:3000/users/login', {
+
+    fetch("http://localhost:3000/users/login", {
       method: "POST",
       headers: {
-        'content-type':  'application/json'
+        "content-type": "application/json",
       },
-      body: JSON.stringify(payload)
-    }).then(res => res.json()).then(resData => {
-      console.log(resData)
-    }).catch(err => setErrMessage("Username or Password wrong"));
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((resData) => {
+        onLoginSuccess(resData);
+        history.push("/products");
+      })
+      .catch((err) => setErrMessage("Username or Password wrong"));
   };
   return (
     <div className="login">
@@ -97,5 +106,12 @@ const SignIn = () => {
     </div>
   );
 };
-
-export default SignIn;
+const mapStateToProps = (state) => {
+  return {};
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onLoginSuccess: (payload) => dispatch({ type: "LOGIN_SUCCESS", payload }),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
