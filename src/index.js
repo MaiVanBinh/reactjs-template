@@ -6,12 +6,15 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore, compose, combineReducers } from "redux";
+import tokenReducer from './reduxConfig/reducer/token';
 
 // redux
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+  token: tokenReducer,
+});
 
 const store = createStore(rootReducer, composeEnhancers());
 

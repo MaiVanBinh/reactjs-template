@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from "react";
 import { Switch, Route, useLocation, Redirect } from "react-router-dom";
 import Loader from "../components/UI/Loader/Loader";
 import ErrorBoundary from "./ErrorBoundary";
+import { useSelector } from "react-redux";
 
 const PrivateRoutes = [
   {
@@ -26,8 +27,12 @@ function PrivateRoute({ children, ...rest }) {
   // private routes sẽ được định nghĩa trong PageRouter, giả sử như có nhiều tầng private router khác nhau thì trong PageRouter lại tiếp tục chia ra public router và private router
   let location = useLocation();
 
+  // token from  redux
+  const accessToken = useSelector((state) => state.token);
+  // console.log();
+
   // check login
-  const isLoggedIn = false;
+  const isLoggedIn = accessToken ? true : false;
   if (isLoggedIn) return <Route {...rest}>{children}</Route>;
   return (
     <Redirect
