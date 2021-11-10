@@ -28,9 +28,25 @@ const ApiFetching = () => {
         console.log(err.response.data);
       });
   };
+
+  const createProduct = (token, payload, callbackSuccess) => {
+    const headers = {
+      "Content-type": "application/json",
+      Authorization: token,
+    };
+    axios
+      .post("/products", payload, { headers: headers })
+      .then((res) => {
+        callbackSuccess(res.data);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+  }
   return {
     login,
-    getProducts
+    getProducts,
+    createProduct
   };
 };
 

@@ -10,6 +10,11 @@ const PrivateRoutes = [
     exact: true,
     component: lazy(() => import("./../pages/products/Products")),
   },
+  {
+    path: "/products-create",
+    exact: true,
+    component: lazy(() => import("../pages/productsCreate/ProductCreate")),
+  }
 ];
 
 const publicRoutes = [

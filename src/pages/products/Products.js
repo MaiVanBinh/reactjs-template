@@ -46,11 +46,11 @@ const Products = () => {
   };
   return (
     <section>
-      <TopMenu
+      {/* <TopMenu
         productsFilter={productsFilter}
         changeFilter={changeCurrentFilterHandler}
         currentFilter={currentFilter}
-      />
+      /> */}
       <ListProducts products={products} />
       <Pagination />
     </section>
